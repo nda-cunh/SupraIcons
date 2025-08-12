@@ -3,6 +3,8 @@
 
 SupraIcons is a fork of the popular `vim-devicons` plugin, rewritten from the ground up to be more performant and to include a significantly larger number of icons. While the original project was excellent, it lacked icons and its speed was not optimal. **SupraIcons solves these issues**, offering a fast and visually rich solution for all your file and directory icon needs in Vim.
 
+<img src="data_git/readme_image.png">
+
 ---
 
 ## ✨ Key Features
