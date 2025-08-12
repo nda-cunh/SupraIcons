@@ -339,6 +339,8 @@ def g:WebDevIconsGetFileTypeSymbol(value: string, type_id: number = -1): string
 	return GetFileSymbol(value)
 enddef
 
+# autocmd TextChanged * if &filetype == 'nerdtree' | call UpdateNerdTreeIcons() | endif
+
 def UpdateNerdTreeIcons(): void
 	if !exists('g:loaded_webdevicons')
 		return
@@ -371,23 +373,25 @@ g:WebDevIconsTabAirLineAfterGlyphPadding = ''
 g:_webdevicons_airline_orig_formatter = get(g:, 'airline#extensions#tabline#formatter', 'default')
 g:airline#extensions#tabline#formatter = 'SupraIcon'
 
-var fileformat: string = ''
+g:webdevicons_enable = 1
 
+var fileformat: string = ''
 def g:WebDevIconsGetFileFormatSymbol(): string
-	if fileformat != ''
-		return fileformat
-	endif
-	if &fileformat ==? 'dos'
-		fileformat = ''
-	elseif &fileformat ==? 'unix'
-		fileformat = isDarwin() ? '' : getDistro()
-	elseif &fileformat ==? 'mac'
-		fileformat = ''
-	endif
-	return fileformat
+	# if fileformat != ''
+	# 	return fileformat
+	# endif
+	# if &fileformat ==? 'dos'
+	# 	fileformat = ''
+	# elseif &fileformat ==? 'unix'
+	# 	fileformat = isDarwin() ? '' : getDistro()
+	# elseif &fileformat ==? 'mac'
+	# 	fileformat = ''
+	# endif
+	# return fileformat
+	return 'X'
 enddef
 
-def isDarwin(): bool
+def IsDarwin(): bool
 	if has('macunix')
 		return true 
 	endif
@@ -407,9 +411,21 @@ enddef
 
 
 def AirlineWebDevIcons(...name: list<string>)
+	echom 'AirlineWebDevIcons called'
+	# echom 'AirlineWebDevIcons called'
+	# w:airline_section_x = get(w:, 'airline_section_x', get(g:, 'airline_section_x', ''))
+	# w:airline_section_x ..= ' %{WebDevIconsGetFileTypeSymbol()}%{WebDevIconsGetFileTypeSymbol()} '
 	var hasFileFormatEncodingPart = airline#parts#ffenc() !=? ''
+	# if g:webdevicons_enable_airline_statusline_fileformat_symbols && hasFileFormatEncodingPart
+		# w:airline_section_y = ' %{&fenc . " " . WebDevIconsGetFileFormatSymbol()} '
+		# w:airline_section_z = ' %{&ff . " " . &fileformat} '
+	# endif
 enddef
 
 if g:webdevicons_enable == 1 && exists('g:loaded_airline') && g:loaded_airline == 1 && g:webdevicons_enable_airline_statusline
 	call airline#add_statusline_func('AirlineWebDevIcons')
+endif
+
+if g:webdevicons_enable == 1 && g:webdevicons_enable_airline_tabline
+	# g:airline#extensions#tabline#formatter = 'webdevicons'
 endif
