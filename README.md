@@ -34,6 +34,8 @@ https://github.com/Donaldttt/fuzzyy can use it directly
 for integrate it just check if g:webdevicons_enable is set
 and you can call the function directly
 
+You can get the Distro icon with **g:WebDevIconsGetFileFormatSymbol()**
+
 #### Usage Example
 
 ```vim
