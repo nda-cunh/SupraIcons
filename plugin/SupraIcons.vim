@@ -386,7 +386,7 @@ def g:WebDevIconsGetFileTypeSymbol(_value: string = '', type_id: number = -1): s
 		endif
 		if is_file
 			var sym = GetFileSymbol(value)
-			if sym == '󰈔' && IsBinary(value)
+			if (sym == '󰈔' || sym == '󰈙') && IsBinary(value)
 				return ''
 			endif
 			return GetFileSymbol(value)
