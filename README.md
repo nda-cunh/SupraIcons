@@ -53,6 +53,6 @@ let auto_icon = g:WebDevIconsGetFileTypeSymbol("src/main.js")
 This function returns a string containing the appropriate icon. You can use it in your status line, in a file explorer, or anywhere you wish to display an icon.
 
 
-### Palette Support
+### 🎨 Palette Support
 
 Call `SupraIcons#Palette#Apply()` to apply a color palette that matches your Vim theme. This ensures that the icons blend seamlessly with your overall color scheme.
