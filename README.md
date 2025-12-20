@@ -12,6 +12,7 @@ SupraIcons is a fork of the popular `vim-devicons` plugin, rewritten from the gr
 * **Optimized Performance**: A complete rewrite of the code for ultra-fast icon detection.
 * **More Icons**: An expanded icon library for better coverage of file and directory types.
 * **Easy Integration**: Integrates effortlessly with your existing Vim configuration.
+* **Palette Support**: Supports multiple color palettes to match your Vim theme.
 
 ---
 
@@ -50,3 +51,8 @@ let auto_icon = g:WebDevIconsGetFileTypeSymbol("src/main.js")
 ```
 
 This function returns a string containing the appropriate icon. You can use it in your status line, in a file explorer, or anywhere you wish to display an icon.
+
+
+### Palette Support
+
+Call `SupraIcons#Palette#Apply()` to apply a color palette that matches your Vim theme. This ensures that the icons blend seamlessly with your overall color scheme.
