@@ -4,7 +4,7 @@ vim9script
 #  All Icons for SupraIcons
 ##################################
 
-const file_node_extensions = {
+const file_node_extensions: dict<string> = {
 	'styl': '',
 	'htm': '',
 	'html': '',
