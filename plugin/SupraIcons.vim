@@ -389,7 +389,7 @@ def g:WebDevIconsGetFileTypeSymbol(_value: string = '', type_id: number = -1): s
 			if (sym == '󰈔' || sym == '󰈙') && IsBinary(value)
 				return ''
 			endif
-			return GetFileSymbol(value)
+			return sym 
 		endif
 	endif
 	return GetFileSymbol(value)
@@ -446,56 +446,3 @@ def GetDistro(): string
 	endif
 	return '' # Default to generic Linux icon
 enddef
-
-########################################
-# Airline Integration
-########################################
-
-g:webdevicons_enable_airline_tabline = 1
-g:webdevicons_enable_airline_statusline = 1
-g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
-g:WebDevIconsTabAirLineBeforeGlyphPadding = ' '
-g:WebDevIconsTabAirLineAfterGlyphPadding = ''
-g:_webdevicons_airline_orig_formatter = get(g:, 'airline#extensions#tabline#formatter', 'default')
-g:airline#extensions#tabline#formatter = 'SupraIcon'
-
-def AirlineActiveFunc(...name: list<any>): any
-	var ctx = name[0]._context
-	var buf = ctx.bufnr
-	# Support for SupraWater filetype
-	if getbufvar(buf, '&filetype') == 'suprawater'
-		if exists('b:is_supra_tree')
-			w:airline_section_a = 'SupraWater 󰥨 '
-		else
-			w:airline_section_b = 'SupraWater 󰥨 '
-		endif
-		w:airline_section_c = ''
-		w:airline_section_x = ''
-		w:airline_section_y = ''
-		w:airline_section_z = ''
-		return 0
-	endif
-
-	w:airline_section_x = get(w:, 'airline_section_x', get(g:, 'airline_section_x', ''))
-	w:airline_section_x ..= ' %{WebDevIconsGetFileTypeSymbol()} '
-	var hasFileFormatEncodingPart = airline#parts#ffenc() !=? ''
-	if g:webdevicons_enable_airline_statusline_fileformat_symbols && hasFileFormatEncodingPart
-		w:airline_section_y = ' %{&fenc . " " . WebDevIconsGetFileFormatSymbol()} '
-	endif
-	return 0
-enddef
-
-def AirlineInactiveFunc(...name: list<any>): any 
-	var ctx = name[0]._context
-	var wid = win_getid(ctx.winnr)
-	if getwinvar(wid, '&filetype') == 'suprawater'
-		setwinvar(wid, 'airline_section_c', 'SupraWater 󰥨 ')
-		return 0
-	endif
-	return 0 
-enddef
-
-if g:webdevicons_enable == 1 && g:webdevicons_enable_airline_statusline == 1
-	airline#add_statusline_func(function('AirlineActiveFunc'))
-	airline#add_inactive_statusline_func(function('AirlineInactiveFunc'))
-endif
