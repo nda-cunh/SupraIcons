@@ -1,269 +1,11 @@
 vim9script
 
+import autoload '../autoload/SupraIcons/Icons.vim' as icons
+
 ##################################
 #  All Icons for SupraIcons
 ##################################
 
-const file_node_extensions: dict<string> = {
-	'styl': '',
-	'htm': '',
-	'html': '',
-	'slim': '',
-	'ttf': '',
-	'otf': '',
-	'woff': '',
-	'woff2': '',
-	'eot': '',
-	'haml': '',
-	'js': '',
-	'mjs': '',
-	'ejs': '',
-	'cjs': '',
-	'css': '',
-	'less': '',
-	'md': '',
-	'mdx': '',
-	'markdown': '',
-	'rmd': '',
-	'json': '',
-	'webmanifest': '',
-	'zig': '',
-	'nim': '',
-	'scss': '',
-	'sass': '',
-	'jsx': '',
-	'rb': '',
-	'gemspec': '',
-	'rake': '',
-	'php': '',
-	'py': '',
-	'pyc': '',
-	'pyo': '',
-	'pyd': '',
-	'coffee': '',
-	'mustache': '',
-	'hbs': '',
-	'conf': '',
-	'ini': '',
-	'yml': '',
-	'yaml': '',
-	'toml': '',
-	'bat': '',
-	'mk': '',
-	'svg': '󰜡',
-	'svgz': '󰜡',
-	'jpg': '',
-	'tex': '',
-	'latex': '',
-	'jpeg': '',
-	'bmp': '',
-	'png': '',
-	'webp': '',
-	'gif': '',
-	'ico': '',
-	'twig': '',
-	'svelte': '',
-	'cpp': '',
-	'c++': '',
-	'cxx': '',
-	'cc': '',
-	'cp': '',
-	'c': '',
-	'blp': '',
-	'cs': '󰌛',
-	'h': '',
-	'hh': '',
-	'hpp': '',
-	'hxx': '',
-	'hs': '',
-	'lhs': '',
-	'nix': '',
-	'lua': '',
-	'java': '',
-	'water': '󰥨',
-	'vala': '',
-	'vapi': '',
-	'kt': '',
-	'kts': '',
-	'ktm': '',
-	'ktsm': '',
-	'odt': '',
-	'ods': '',
-	'odp': '',
-	'odg': '',
-	'odb': '',
-	'odf': '',
-	'docx': '󱎒',
-	'doc': '󱎒',
-	'xlsx': '󱎏',
-	'xls': '󱎏',
-	'pptx': '󱎐',
-	'ppt': '󱎐',
-	'accdb': '󱎎',
-	'mdb': '󱎎',
-	'one': '󰝇',
-	'pdf': '',
-	'csv': '',
-	'zip': '',
-	'tar': '',
-	'gz': '',
-	'7z': '',
-	'xz': '',
-	'bz2': '',
-	'asm': '',
-	'cfg': '',
-	'deb': '',
-	'log': '',
-	's': '',
-	'bin': '',
-	'iso': '',
-	'ld': '',
-	'mp4': '',
-	'mkv': '',
-	'avi': '',
-	'mov': '',
-	'mp3': '',
-	'wav': '',
-	'flac': '',
-	'ogg': '',
-	'opus': '',
-	'm3u': '',
-	'suprapack': '',
-	'hsc': '',
-	'hs-boot': '',
-	'xml': '󰗀',
-	'o': '',
-	'sh': '',
-	'fish': '',
-	'bash': '',
-	'zsh': '',
-	'ksh': '',
-	'csh': '',
-	'awk': '',
-	'ps1': '',
-	'ml': 'λ',
-	'mli': 'λ',
-	'diff': '',
-	'pg': '',
-	'db': '',
-	'sql': '',
-	'dump': '',
-	'clj': '',
-	'cljc': '',
-	'cljs': '',
-	'edn': '',
-	'scala': '',
-	'go': '',
-	'dart': '',
-	'xul': '',
-	'sln': '',
-	'suo': '',
-	'pl': '',
-	'pm': '',
-	't': '',
-	'rss': '',
-	'f#': '',
-	'fsscript': '',
-	'fsx': '',
-	'fs': '',
-	'fsi': '',
-	'rs': '',
-	'rlib': '',
-	'd': '',
-	'erl': '',
-	'hrl': '',
-	'ex': '',
-	'exs': '',
-	'eex': '',
-	'leex': '',
-	'heex': '',
-	'vim': '',
-	'ai': '',
-	'psd': '',
-	'psb': '',
-	'ts': '',
-	'tsx': '',
-	'jl': '',
-	'pp': '',
-	'vue': '﵂',
-	'elm': '',
-	'swift': '',
-	'xcplayground': '',
-	'r': '',
-	'rproj': '',
-	'sol': '',
-	'hx': '',
-	'pem': '',
-	'gradle': '',
-	'so': '',
-}
-
-const file_node_exact_matches = {
-	'a': '󰬈',
-	'b': '󰬉',
-	'c': '󰬊',
-	'd': '󰬋',
-	'e': '󰬌',
-	'f': '󰬍',
-	'x': '󰬟',
-	'y': '󰬠',
-	'z': '󰬡',
-	'info': '',
-	'pom.xml': '',
-	'meson.build': '',
-	'gruntfile.coffee': '',
-	'gruntfile.js': '',
-	'gruntfile.ls': '',
-	'gulpfile.coffee': '',
-	'gulpfile.js': '',
-	'gulpfile.ls': '',
-	'mix.lock': '',
-	'dropbox': '',
-	'.ds_store': '',
-	'.gitconfig': '',
-	'LICENSE': '',
-	'.gitignore': '',
-	'.gitattributes': '',
-	'.gitlab-ci.yml': '',
-	'.bashrc': '',
-	'.zshrc': '',
-	'.zshenv': '',
-	'.zprofile': '',
-	'.vimrc': '',
-	'.gvimrc': '',
-	'_vimrc': '',
-	'_gvimrc': '',
-	'.bashprofile': '',
-	'favicon.ico': '',
-	'license': '',
-	'node_modules': '',
-	'react.jsx': '',
-	'procfile': '',
-	'dockerfile': '',
-	'docker-compose.yml': '',
-	'rakefile': '',
-	'config.ru': '',
-	'gemfile': '',
-	'makefile': '',
-	'cmakelists.txt': '',
-	'robots.txt': '󰚩',
-}
-
-const folder_node_exact_matches = {
-	'.git': '',
-	'.github': '',
-	'node_modules': '',
-	'home': '󱂵',
-	'pictures': '󰉏',
-	'images': '󰉏',
-	'music': '󱍙',
-	'downloads': '󰉍',
-	'favorites': '󰚝',
-	'videos': '󱧺',
-	'documents': '󰉓',
-	'lib': '',
-	'desktop': '',
-}
 const folder_open = ''
 
 g:loaded_webdevicons = 1
@@ -272,13 +14,6 @@ g:webdevicons_enable = 1
 #####################################
 #  Utility Functions
 #####################################
-
-def IsDarwin(): bool
-	if has('macunix')
-		return true 
-	endif
-	return false 
-enddef
 
 def IsBinary(path: string): bool
 	return match(readfile(path, '', 10), '\%x00', 0, 1) != -1
@@ -292,8 +27,8 @@ def GetDirectorySymbol(_path: string): string
 		path = _path
 	endif
 	const name = tolower(fnamemodify(path, ':t'))
-	if has_key(folder_node_exact_matches, name)
-		return folder_node_exact_matches[name]
+	if has_key(icons.icons_matches_folders, name)
+		return icons.icons_matches_folders[name]
 	endif
 	if isdirectory(_path)
 		# check if we have permission to read the directory
@@ -310,13 +45,18 @@ enddef
 
 def GetFileSymbol(path: string): string
 	const name = tolower(fnamemodify(path, ':t'))
-	if has_key(file_node_exact_matches, name)
-		return file_node_exact_matches[name]
+
+	# Match the filename
+	if has_key(icons.icons_matches_files, name)
+		return icons.icons_matches_files[name]
 	endif
+
+	# Match the extension
 	const ext = fnamemodify(name, ':e')
-	if has_key(file_node_extensions, ext)
-		return file_node_extensions[ext]
+	if has_key(icons.icons_ext, ext)
+		return icons.icons_ext[ext]
 	endif
+
 	if !isdirectory(path)
 		# check if we have permission to read the file 
 		try 
@@ -332,8 +72,6 @@ def GetFileSymbol(path: string): string
 	return '󰈔' # Default file icon
 enddef
 
-
-
 #######################################
 # Public Functions (WebDevIcons)
 #######################################
@@ -347,7 +85,7 @@ def g:WebDevIconsGetFileFormatSymbol(): string
 	if &fileformat ==? 'dos'
 		fileformat = ''
 	elseif &fileformat ==? 'unix'
-		fileformat = IsDarwin() ? '' : GetDistro()
+		fileformat = has('macunix') ? '' : GetDistro()
 	elseif &fileformat ==? 'mac'
 		fileformat = ''
 	endif
@@ -411,35 +149,10 @@ def GetDistro(): string
 			if idx == -1
 				throw 'Distro not found'
 			endif
-			const distro = content[idx][11 : -1]
-			if distro ==# 'Ubuntu'
-				return ''
-			elseif distro =~# 'Arch'
-				return ''
-			elseif distro =~# 'Fedora'
-				return ''
-			elseif distro =~# 'Gentoo'
-				return ''
-			elseif distro =~# 'Cent'
-				return ''
-			elseif distro =~# 'Debian'
-				return ''
-			elseif distro =~# 'Red Hat'
-				return ''
-			elseif distro =~# 'SUSE'
-				return ''
-			elseif distro =~# 'Manjaro'
-				return ''
-			elseif distro =~# 'Linux Mint'
-				return ''
-			elseif distro =~# 'Pop'
-				return ''
-			elseif distro =~# 'Zorin'
-				return ''
-			elseif distro =~# 'Elementary'
-				return ''
-			elseif distro =~# 'Dock'
-				return ''
+			var distro = content[idx][11 : -1]
+			distro = tolower(distro)
+			if has_key(icons.icons_distro, distro)
+				return icons.icons_distro[distro]
 			endif
 		catch
 		endtry
