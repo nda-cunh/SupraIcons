@@ -44,7 +44,7 @@ def Highlight(colors: list<string>)
     endfor
 enddef
 
-export def ApplyDefaults()
+def ApplyDefaults()
     var colors: list<string>
 
     if exists('g:terminal_ansi_colors')
@@ -63,4 +63,4 @@ export def ApplyDefaults()
     augroup END
 enddef
 
-call ApplyDefaults()
+ApplyDefaults()

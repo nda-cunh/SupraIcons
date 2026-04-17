@@ -20,17 +20,17 @@ export def Apply(palette_arg: dict<list<string>> = {})
 
     augroup GlyphPaletteInternal
         autocmd! * <buffer>
-        autocmd BufEnter,WinEnter <buffer> ApplyToWindow()
+		autocmd WinEnter,BufWinEnter <buffer> ApplyToWindow()
     augroup END
 
-    Clear()
+    ClearWindow()
     ApplyToWindow()
 enddef
 
 
 def ApplyToWindow()
     if !exists('b:supra_icons_palette')
-        Clear()
+		ClearWindow()
         return
     endif
 
@@ -43,10 +43,20 @@ def ApplyToWindow()
 
 	# Apply new ones
     w:glyph_palette_matches = []
-    for [group, regex] in items(b:supra_icons_palette)
-        var mid = matchadd(group, regex)
+	for [group, regex] in items(b:supra_icons_palette)
+        # On ajoute une priorité élevée (ex: 10) pour passer au-dessus de la syntaxe
+        var mid = matchadd(group, regex, 10)
         add(w:glyph_palette_matches, mid)
     endfor
+enddef
+
+def ClearWindow()
+    if exists('w:glyph_palette_matches')
+        for match_id in w:glyph_palette_matches
+            silent! matchdelete(match_id)
+        endfor
+        unlet w:glyph_palette_matches
+    endif
 enddef
 
 def Clear()
