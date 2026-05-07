@@ -4,7 +4,7 @@ vim9script
 # Airline Integration
 ########################################
 
-if !exists('g:loaded_airline')
+if get(g:, 'supraicons_airline_enable', false) == false
 	finish
 endif
 

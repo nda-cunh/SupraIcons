@@ -56,3 +56,11 @@ This function returns a string containing the appropriate icon. You can use it i
 ### 🎨 Palette Support
 
 Call `SupraIcons#Palette#Apply()` to apply a color palette that matches your Vim theme. This ensures that the icons blend seamlessly with your overall color scheme.
+
+### 🔌 External Plugin Support
+
+#### Airline
+
+```vim
+let g:supraicons_airline_enable = v:true
+```
