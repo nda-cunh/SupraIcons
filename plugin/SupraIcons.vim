@@ -53,8 +53,15 @@ def GetFileSymbol(path: string): string
 
 	# Match the extension
 	const ext = fnamemodify(name, ':e')
-	if has_key(icons.icons_ext, ext)
-		return icons.icons_ext[ext]
+	if ext == 'in'
+		const ext_base = fnamemodify(name, ':r:e')
+		if has_key(icons.icons_ext, ext_base)
+			return icons.icons_ext[ext_base]
+		endif
+	else
+		if has_key(icons.icons_ext, ext)
+			return icons.icons_ext[ext]
+		endif
 	endif
 
 	if !isdirectory(path)
