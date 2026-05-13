@@ -644,6 +644,8 @@ export const icons_ext: dict<string> = {
 
 export const icons_matches_files = {
 	'meson.build': '',
+	'meson.options': '',
+	'meson_options.txt': '',
 	'._ds_store': '',
 	'.aliases': '󱆃',
 	'.atom': '',
